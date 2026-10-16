@@ -16,3 +16,11 @@ dev-dist
 
 # v335: iPhone app shell packages
 ios-app/node_modules
+
+# v338: tests travel packed in dev/tests.tgz (AI Studio 1,000-file GitHub limit). Loose copies never get pushed.
+*.test.js
+*.test.jsx
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.ts

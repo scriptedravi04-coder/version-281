@@ -11,9 +11,11 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "check:crashes": "node scripts/check-crashes.mjs",
-    "verify": "npx tsc --noEmit && node scripts/check-crashes.mjs && npx vitest run --config vitest.config.mjs",
+    "verify": "npm run tests:unpack && npx tsc --noEmit && node scripts/check-crashes.mjs && npx vitest run --config vitest.config.mjs",
     "protect:update": "node scripts/protectedFlows.mjs --update",
-    "protect:check": "npx vitest run --config vitest.config.mjs backend/protectedFlows.test.ts"
+    "protect:check": "npm run tests:unpack && npx vitest run --config vitest.config.mjs backend/protectedFlows.test.ts",
+    "tests:unpack": "node scripts/tests-archive.mjs unpack",
+    "tests:pack": "node scripts/tests-archive.mjs pack"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

@@ -28,6 +28,14 @@ What already works in the code (v335):
 - A **Mac** with **Xcode** (free, App Store) and an **Apple Developer account** (₹8,700/year).
 - Node 20+ on the Mac.
 
+## Quick way (v337)
+One command does steps 1–4 below (checks Xcode / Node / CocoaPods, installs, creates the Xcode project, icon,
+web build, Info.plist keys, push code) and opens Xcode:
+```bash
+cd ios-app && bash scripts/mac-prepare.sh
+```
+Then only Signing & Capabilities + Run / Archive are left in Xcode (the script prints them).
+
 ## Build steps (on the Mac)
 ```bash
 # 1. In the project root: install the app's packages once

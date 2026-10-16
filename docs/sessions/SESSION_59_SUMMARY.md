@@ -52,7 +52,7 @@ Why: v335/v336 sent the iPhone app and its live update to https://ybexmedia.in, 
 - Root now: README.md (folder map), AGENTS.md + GEMINI.md (AI agent rules — must stay in root), config files.
 - `docs/` (index `docs/README.md`): `setup/` (ENV_KEYS, DOMAIN_CLOUDFLARE, APP_STORE_CHECKLIST, OFFLINE_AND_APP_STORE),
   `code/` (CODE_MAP, ARCHITECTURE, PROTECTED_CHANGES, CONTRIBUTING, UNIQUE_FEATURES), `database/` (PENDING_DB_CHANGES +
-  all Supabase prompts), `sessions/` (58, 59) + `sessions/archive/` (21–57), `archive/` (old brand mobile audit).
+  all Supabase prompts), `sessions/` (58, 59) + `sessions/archive/` (21–57; merged into one file in v338), `archive/` (old brand mobile audit).
 - All references updated (code comments, tests, scripts/protectedFlows.mjs now logs to docs/code/PROTECTED_CHANGES.md).
   Test path pins moved (requirement change): loadingStates, session49, session43V290Invite. Locked files untouched
   (one comment rewrite in directInvites.ts was put back).
@@ -75,3 +75,16 @@ once on the deploy machine.
 - APNs .p8 key + Key ID + Team ID on the server; Mac iPhone build (ios-app/README.md).
 - Test Block: block from a profile and from the chat menu, try messaging / inviting / applying from both accounts,
   check Help → Blocked people → Unblock, check Admin → System reports shows the block.
+
+---
+# v338 (same session) — AI Studio GitHub import: "1000 files imported, 130 skipped"
+AI Studio imports at most 1,000 files from GitHub; v337 had 1,133, so 130+ files were silently missing (broken deploy).
+- All 187 test files packed into ONE file `dev/tests.tgz` (same paths inside). `npm run tests:unpack` puts them back,
+  `npm run tests:pack` packs them again and removes the loose copies; `npm run verify` / `protect:check` unpack first.
+  Loose `*.test.*` / `*.spec.*` are in .gitignore. New `scripts/tests-archive.mjs`. AGENTS.md + GEMINI.md explain it.
+- Old summaries 21–57 merged into `docs/sessions/SESSIONS_21_to_57.md` (text unchanged); session49 test pin moved
+  (requirement change, commented).
+- Repo now **913 files** (87 under the limit). No app code changed.
+- Tests: unpacked → bun suite 796 pass / same 106 environment failures as before, 0 new; packed again.
+- Ravi: the GitHub repo must be REPLACED (old files deleted), not uploaded on top — otherwise the old test files stay
+  and the count is still over 1,000. Keep new files under ~950 in future (big file sets → one archive).

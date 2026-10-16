@@ -7,7 +7,8 @@
     "web": "cd .. && VITE_API_ORIGIN=${VITE_API_ORIGIN:-https://ybexapp.ai.studio} npx vite build && node scripts/ota-bundle.mjs",
     "assets": "npx @capacitor/assets generate --ios --iconBackgroundColor '#9B00FF' --splashBackgroundColor '#9B00FF'",
     "sync": "npm run web && node scripts/set-builtin-version.mjs && npx cap sync ios",
-    "open": "npx cap open ios"
+    "open": "npx cap open ios",
+    "prepare:mac": "bash scripts/mac-prepare.sh"
   },
   "dependencies": {
     "@capacitor/app": "^7.0.0",

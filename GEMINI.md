@@ -30,3 +30,9 @@ The full list, with the reason for each rule and the test that guards it, is at 
 Follow docs/code/ARCHITECTURE.md "Loading states" (rule 35) in every new screen: button actions use `useBusy` + `<ButtonSpinner />` (never `startLoading()`), page data uses `ContentSkeletons`, the global loader stays a 2px top bar. Do not bring back the full-screen blurred loader or a big wordmark.
 
 UGC cancels never refund through Razorpay: a creator cancel keeps the money in the brief and relists the slot; a brand order-cancel (24h+, no draft) goes to the manual Admin → UGC Refunds queue. See docs/code/ARCHITECTURE.md rules 51–52 before touching `/ugc/orders/:id/cancel`.
+
+## Tests are packed (v338)
+AI Studio imports at most 1,000 files from GitHub, so all test files live in ONE file: `dev/tests.tgz`.
+`npm run tests:unpack` puts them back next to the code (`npm run verify` does this first). After adding or changing a
+test run `npm run tests:pack` — never push loose `*.test.*` files (they are in .gitignore). Unpacked tests still follow
+every rule above: never edit or delete a test to make it pass.

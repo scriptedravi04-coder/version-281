@@ -19,6 +19,6 @@
 
 ## sessions/ — har session ka summary
 - Naya summary sabse upar wala number (`SESSION_59_SUMMARY.md` = v337 se).
-- `archive/` — Session 21–57 (purana record, kaam ka nahi to kholne ki zaroorat nahi).
+- `SESSIONS_21_to_57.md` — Session 21–57 ek hi file mein (purana record, kaam ka nahi to kholne ki zaroorat nahi).
 
 ## archive/ — purane audits

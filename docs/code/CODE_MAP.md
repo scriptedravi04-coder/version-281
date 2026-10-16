@@ -53,7 +53,7 @@ A short map so anyone (person or AI tool) can find a feature without opening 2,0
 | `src/pages/` | one folder per role / area: `app` (login), `brand`, `creator`, `admin`, `campaigns`, `collabs`, `ugc`, `onboarding`, `auth`, `help`, `legal`, `blog` |
 | `src/components/` | pieces used by pages, grouped by feature: `admin`, `chat`, `payments`, `profile`, `campaigns`, `ugc`, `referral`, `promo`, `feedback`, `account`, `kyc`, `layout`, `common`, `ui` (library parts) … |
 | `src/lib/`, `src/utils/` | small helpers (API client, formatting, rules) |
-| `docs/` | all notes — index in `docs/README.md` (`setup/`, `code/`, `database/`, `sessions/` with `archive/` for 21–57) |
+| `docs/` | all notes — index in `docs/README.md` (`setup/`, `code/`, `database/`, `sessions/` (21–57 merged in SESSIONS_21_to_57.md)) |
 | `cloudflare/` | Worker that serves ybexmedia.in from ybexapp.ai.studio (v337) |
 | `ios-app/`, `android-overrides/` | iPhone (Capacitor) and Android (Play) store builds |
 | `scripts/` | build / brand / safety scripts (`protectedFlows.mjs`, `check-crashes.mjs`) |
