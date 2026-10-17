@@ -88,3 +88,43 @@ AI Studio imports at most 1,000 files from GitHub; v337 had 1,133, so 130+ files
 - Tests: unpacked → bun suite 796 pass / same 106 environment failures as before, 0 new; packed again.
 - Ravi: the GitHub repo must be REPLACED (old files deleted), not uploaded on top — otherwise the old test files stay
   and the count is still over 1,000. Keep new files under ~950 in future (big file sets → one archive).
+
+---
+# v339 (same session) — no app code change; notes from the deploy / Mac / APK / teaser work
+Deploy (AI Studio secrets) — what Ravi fills now:
+- Required: SUPABASE_URL + VITE_SUPABASE_URL (https://mzcovvzkwzjvzskjqwwy.supabase.co), SUPABASE_ANON_KEY + VITE_SUPABASE_ANON_KEY
+  (legacy anon JWT), SUPABASE_SERVICE_ROLE_KEY, GEMINI_API_KEY, RESEND_API_KEY, ADMIN_EMAIL / ADMIN_ALERT_EMAIL, RAZORPAY_KEY_ID /
+  _KEY_SECRET / _WEBHOOK_SECRET, GOOGLE_CLIENT_ID / _SECRET, VAPID pair (keep old values if they already exist),
+  APP_URL / SITE_URL / VITE_PUBLIC_SITE_URL = https://ybexapp.ai.studio, PAYMENTS_TEST_MODE=false, OTP_ECHO=off, NODE_ENV=production.
+- Must stay EMPTY: DEMO_LOGIN, DEMO_SEED, SEO_NOINDEX, YBEX_SYNC_BLOB, RESEND_ALLOW_FALLBACK, IOS_OTA_OFF, IOS_OTA_MIN_BUILD,
+  VITE_API_ORIGIN, CORS_ORIGINS, ADMIN_QUICK_PIN.
+- Later: SESSION/OAUTH_STATE/MEDIA_KEY/EMAIL_LINK/CRON secrets (code falls back to the service key), PROXY_SHARED_SECRET
+  (Cloudflare step), APNS_* + APPLE_CLIENT_ID (iPhone), VITE_PLAY_STORE_URL (after Play is live), WhatsApp, limits.
+Razorpay webhook (Live mode): URL https://ybexapp.ai.studio/api/payments/razorpay/webhook, own secret (= RAZORPAY_WEBHOOK_SECRET),
+  events payment.captured + order.paid only (the server reads just these two).
+GitHub → AI Studio: replace the repo with v338/v339 (delete old files) — the 1,000-file import limit.
+Mac (linked): Xcode is NOT installed → iPhone build waits. Ravi installs Xcode from the App Store (~15 GB), then double-clicks
+  Desktop/Ybex-Mac-Check.command (read-only check → Desktop/ybex-mac-check.txt). Claude can't type in Terminal/Xcode (click only),
+  so setup will be double-click .command files + Ravi's Apple ID steps. APNs .p8 key: developer.apple.com → Keys.
+Android APK: not live on Play yet → new signing key is fine. Plan: PWABuilder (Ravi in Chrome; the built-in browser blocked it):
+  package com.ybex.app, host ybexapp.ai.studio, start /app, version 1.0.2 / code 3, colours #7E00DC, new key. Then send the zip →
+  Claude puts the new SHA-256 into public/.well-known/assetlinks.json (+ Play App Signing fingerprint after upload).
+  Keep signing.keystore + signing-key-info.txt safe (Drive + pen drive). Plain-purple Android 12 splash needs a Bubblewrap build.
+Teaser video (separate file: ybex-teaser-kit.zip — not inside the app repo):
+- Final: Ybex_ComingSoon_16x9_v4.mp4, 20 s, 1080p, no sound. Light lavender + purple glows, Eva part mint/lime, fast kinetic
+  text (Zelios-style reference), straight iPhone mockup (Ravi's), screens rebuilt from the real app UI (brand home, creator home,
+  Eva chat, deal chat offer → signed, Review & pay → success), Instagram/YouTube/Facebook tiles, Razorpay at payment, original
+  ₹ notes, ends on iPhone home screen (Ybex icon shine) + "Coming soon." + App Store / Google Play badges.
+- Logo = real app icon (white "Ybex." incl. white dot — no lime on the logo). Lime only for Eva.
+- Not done: Reel 9:16 render, sound/voiceover (Ravi adds in CapCut or sends SFX/music to sync), separate longer intro video.
+
+---
+# v340 (same session) — Android package from PWABuilder
+- PWABuilder (Google Play): package com.ybex.app, host ybexapp.ai.studio, start /app, version 1.0.2 / code 3, all colours
+  #7E00DC, NEW signing key (alias my-key-alias, CN Ybex Admin, C=IN). Report: 0 errors.
+- `public/.well-known/assetlinks.json`: old fingerprint (14:6D:…:18:A9) replaced with the new key
+  32:66:47:E9:44:3A:74:13:9F:41:D9:8A:72:0E:4C:52:89:9D:EE:B2:70:BC:36:44:FC:14:F2:32:45:E6:C6:41 (checked against the APK cert).
+- After the first AAB upload, add Play Console → App integrity → App signing key SHA-256 as a 2nd fingerprint
+  (Play re-signs installs from the store; without it the app shows a browser bar).
+- signing.keystore + signing-key-info.txt are NOT in the repo — Ravi keeps them (Drive + pen drive).
+- No app code change.
